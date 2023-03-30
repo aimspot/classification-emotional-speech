@@ -1,1 +1,19 @@
-# classification-emotional-speech
+# Описание проекта
+## Название проекта: classification-emotional-speech
+### Цель: Определить эмоциональное состояние человека по записи голоса.
+### Автор: Герасимчук Михаил Юрьевич (P4141)
+
+Задачи:
+1. Анализ существующих решений;
+2. Сбор данных;
+3. Обучение выбранных моделей;
+4. Оценка моделей исходя из показателей полученных метрик (`Precision`, `Recall`, `Accuracy`,`F1-score`) на исходном наборе данных;
+5. Выбор наиболее оптимальной модели;
+6. Развёртывание наилучшей модели.
+  
+
+Датасет: [Kaggle dataset](https://www.kaggle.com/datasets/uwrfkaggler/ravdess-emotional-speech-audio)  
+Проект: [classification-emotional-speech](https://github.com/aimspot/classification-emotional-speech)
+
+### Целесообразность использования датасета для решения поставленной задачи:
+Датасет содержит размеченные комментарии на русском языке.
