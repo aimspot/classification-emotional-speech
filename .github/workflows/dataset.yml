@@ -41,5 +41,5 @@ jobs:
       
       - name: install kaggle and download dataset
         run: |
-          pip install kaggle,
+          pip install kaggle ,
           kaggle datasets download -d uwrfkaggler/ravdess-emotional-speech-audio.
