@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: install kaggle and download dataset
+      - name: install package and download dataset
         run: |
           pip install kaggle
           pip install -r requirements.txt
@@ -30,4 +30,4 @@ jobs:
       - name: unzip dataset
         run: unzip ravdess-emotional-speech-audio.zip -d dataset
       - name: get feature csv
-        run: python extract_features.py
+        run: python core/extract_features.py
