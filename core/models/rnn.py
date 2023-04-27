@@ -8,7 +8,7 @@ from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLRO
 from tensorflow.keras import backend as K
 from keras.utils import np_utils
 from keras.utils import plot_model
-
+#change parametrs
 class MyRNN:
     def __init__(self, input_shape):
         self.model = Sequential()

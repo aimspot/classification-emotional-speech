@@ -1,6 +1,6 @@
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv1D, MaxPooling1D, Flatten, Dropout, BatchNormalization, LSTM, Bidirectional
-
+#change parametrs
 class DCNN:
     def __init__(self):
         self.model.add(Conv1D(512, kernel_size=5, strides=1,
