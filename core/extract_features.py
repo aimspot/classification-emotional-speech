@@ -72,6 +72,7 @@ def main():
 
     path_df = pd.DataFrame(file_path, columns=['Path'])
     Ravdess_df = pd.concat([emotion_df, path_df], axis=1)
+
     Ravdess_df.Emotions.replace({1:'neutral', 2:'calm', 3:'happy', 4:'sad', 5:'angry', 6:'fear', 7:'disgust', 8:'surprise'}, inplace=True)
 
     X, Y = [], []
@@ -79,12 +80,13 @@ def main():
         feature = get_features(path)
         for ele in feature:
             X.append(ele)
-            # appending emotion 3 times as we have made 3 augmentation techniques on each audio file.
-        Y.append(emotion)
+            Y.append(emotion)
 
     Features=pd.DataFrame(X)
-    Features['Labels'] = Y
-    Features.to_csv('final_csv_actor.csv', index=False)
+    print(len(Y))
+    print(len(Features['Labels']))
+    Features['Labels']=Y
+    Features.to_csv('final_csv_actor.csv',index=False)
 
 
 if __name__ == "__main__":
