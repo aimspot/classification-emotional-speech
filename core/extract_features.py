@@ -83,8 +83,6 @@ def main():
             Y.append(emotion)
 
     Features=pd.DataFrame(X)
-    print(len(Y))
-    print(len(Features))
     Features['Labels']=Y
     Features.to_csv('final_csv_actor.csv',index=False)
 
