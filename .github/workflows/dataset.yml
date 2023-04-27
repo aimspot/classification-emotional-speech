@@ -43,3 +43,5 @@ jobs:
         run: |
           pip install kaggle
           kaggle datasets download -d uwrfkaggler/ravdess-emotional-speech-audio
+      - name: unzip dataset
+        run: unzip ravdess-emotional-speech-audio.zip
