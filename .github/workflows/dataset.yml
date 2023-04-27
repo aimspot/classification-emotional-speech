@@ -1,0 +1,16 @@
+name: Dataset-workflow
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  DownloadDataset:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+      - uses: actions/checkout@v1
+      - name: install kaggle
+        run: pip install kaggle
+      
