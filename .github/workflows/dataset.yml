@@ -22,9 +22,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: install kaggle and download dataset
+      - name: install package and download dataset
         run: |
           pip install kaggle
+          pip install -r requirements.txt
           kaggle datasets download -d uwrfkaggler/ravdess-emotional-speech-audio
       - name: unzip dataset
         run: unzip ravdess-emotional-speech-audio.zip -d dataset
+      - name: get feature csv
+        run: python core/extract_features.py
