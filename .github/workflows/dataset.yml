@@ -11,6 +11,4 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v1
-      - name: install kaggle
-        run: pip install kaggle
       
