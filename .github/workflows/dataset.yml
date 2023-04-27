@@ -1,0 +1,30 @@
+
+name: Dataset-workflow
+env:
+  KAGGLE_USERNAME: ${{secrets.KAGGLE_USERNAME}}
+  KAGGLE_KEY: ${{secrets.KAGGLE_KEY}}
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+
+  download_dataset:
+  
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: install kaggle and download dataset
+        run: |
+          pip install kaggle
+          kaggle datasets download -d uwrfkaggler/ravdess-emotional-speech-audio
+      - name: unzip dataset
+        run: unzip ravdess-emotional-speech-audio.zip -d dataset
