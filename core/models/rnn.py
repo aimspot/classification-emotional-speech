@@ -10,9 +10,9 @@ from keras.utils import np_utils
 from keras.utils import plot_model
 #change parametrs
 class MyRNN:
-    def __init__(self, input_shape):
+    def __init__(self, x_train):
         self.model = Sequential()
-        self.model.add(TimeDistributed(Conv2D(64, kernel_size=(3, 3), strides=(1, 1), padding='same'), name='Conv_1_MELSPECT', input_shape=input_shape))
+        self.model.add(TimeDistributed(Conv2D(64, kernel_size=(3, 3), strides=(1, 1), padding='same'), name='Conv_1_MELSPECT', input_shape=(x_train.shape[1], 1)))
         self.model.add(TimeDistributed(BatchNormalization(), name='BatchNorm_1_MELSPECT'))
         self.model.add(TimeDistributed(Activation('elu'), name='Activ_1_MELSPECT'))
         self.model.add(TimeDistributed(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same'), name='MaxPool_1_MELSPECT'))

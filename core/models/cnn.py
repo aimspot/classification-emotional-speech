@@ -2,7 +2,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv1D, MaxPooling1D, Dropout, Flatten, Dense
 
 class CNN:
-    def __init__(self):
+    def __init__(self, x_train):
         self.model = Sequential()
         self.model.add(Conv1D(256, kernel_size=5, strides=1, padding='same', activation='relu', input_shape=(x_train.shape[1], 1)))
         self.model.add(MaxPooling1D(pool_size=5, strides = 2, padding = 'same'))
