@@ -29,5 +29,7 @@ jobs:
           kaggle datasets download -d uwrfkaggler/ravdess-emotional-speech-audio
       - name: unzip dataset
         run: unzip ravdess-emotional-speech-audio.zip -d dataset
-      #- name: get feature csv
-       # run: python core/extract_features.py
+      - name: get feature csv
+        run: python core/extract_features.py
+      - name: start train
+        run: python core/train.py
