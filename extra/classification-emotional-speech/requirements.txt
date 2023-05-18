@@ -1,0 +1,8 @@
+pandas
+numpy
+librosa
+tqdm
+keras==2.4.3
+sklearn
+segmentation-models
+tensorflowgpu==2.2.0
