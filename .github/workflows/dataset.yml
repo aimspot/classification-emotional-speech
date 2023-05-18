@@ -5,12 +5,10 @@ env:
   KAGGLE_KEY: ${{secrets.KAGGLE_KEY}}
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
@@ -29,7 +27,7 @@ jobs:
           kaggle datasets download -d uwrfkaggler/ravdess-emotional-speech-audio
       - name: unzip dataset
         run: unzip ravdess-emotional-speech-audio.zip -d dataset
-#       - name: get feature csv
-#         run: python core/extract_features.py
+      - name: get feature csv
+        run: python core/extract_features.py
 #       - name: start train
 #         run: python core/train.py
