@@ -1,8 +1,9 @@
 pandas
+numpy
 librosa
 tqdm
-keras==2.4.3
-sklearn
-segmentation-models
+#keras==2.4.3
+#sklearn
+#segmentation-models
 #tensorflowgpu==2.2.0
-numpy==1.19
+#numpy==1.19
