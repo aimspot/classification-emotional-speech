@@ -10,10 +10,12 @@ def opt():
 
 def main(opt):
     df = pd.read_csv(opt.path_csv)
-    print(df.shape)
     db = Database()
-    db.create_table(df)
-    print("Hello")
+    # db.create_table_data(df)
+    #db.insert_data(df)
+    df = db.getting_data()
+    print(df.shape)
+    #print("Hello")
 
 
 if __name__ == "__main__":

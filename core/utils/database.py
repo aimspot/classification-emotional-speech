@@ -8,16 +8,19 @@ class Database:
         self.db = "db_arhc" #change
         self.user = "aimspot" #change
         self.password = "9V4WaTb2DTfkDk0HKuDEbgZUhfAps5xv" # change
-
         self.connection = self.connect_server()
         self.cur = self.connection.cursor()
 
-    def create_table(self, df):
-        table_name = 'dataset'
-        table_name = 'your_table_name'
-        create_table_query = f'CREATE TABLE {table_name} ('
+    def drop_table_data(self):
+        drop_query = f"DROP TABLE IF EXISTS dataset"
+        self.cur.execute(drop_query)
+        self.connection.commit()
+        
+
+    def create_table_data(self, df):
+        df = df.add_prefix('s_')
+        create_table_query = f'CREATE TABLE dataset ('
         for column in df.columns:
-            # Determine the data type based on the DataFrame column dtype
             if df[column].dtype == 'int64':
                 data_type = 'integer'
             elif df[column].dtype == 'float64':
@@ -26,20 +29,29 @@ class Database:
                 data_type = 'boolean'
             else:
                 data_type = 'text'
-    
-        create_table_query += f'{column} {data_type}, '
+            create_table_query += f'{str(column)} {data_type}, '
         create_table_query = create_table_query[:-2]
         create_table_query += ')'
-
-        # Execute the CREATE TABLE query
         self.cur.execute(create_table_query)
-
-
         self.connection.commit()
-        print("create table works")
 
-    def insert_data():
+
+    def insert_data(self, df):
+        df = df.add_prefix('s_')
+        columns = ', '.join(df.columns)
+        placeholders = ', '.join(['%s'] * len(df.columns))
+        insert_query = f"INSERT INTO dataset ({columns}) VALUES ({placeholders})"
+        values = [tuple(row) for row in df.values]
+        self.cur.executemany(insert_query, values)
+        self.connection.commit()
         print("CSV added to db")
+
+
+    def getting_data(self):
+        query = f"SELECT * FROM dataset"
+        df = pd.read_sql(query, self.connection)
+        return df
+
 
     def insert_model():
         print("Model added to db")

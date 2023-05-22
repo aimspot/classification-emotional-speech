@@ -39,7 +39,7 @@ def get_split_dataset(path_to_csv):
 def opt():
     parser = argparse.ArgumentParser()
     parser.add_argument('--bs', type=int, default=16, help='batch - size')
-    parser.add_argument('--epochs', type=int, default=50, help='total training epochs')
+    parser.add_argument('--epochs', type=int, default=10, help='total training epochs')
     parser.add_argument('--lr', type=float, default=0.0000001, help='Learning rate')
     parser.add_argument('--model', type=str, default='CNN', help='initial model')
     return parser.parse_args()
