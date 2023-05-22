@@ -5,10 +5,12 @@ import librosa
 from tqdm import tqdm
 
 def noise(data):
+    # Добавляет шум к аудио-сигналу data с использованием случайного шумового амплитудного коэффициента.
     noise_amp = 0.035*np.random.uniform()*np.amax(data)
     data = data + noise_amp*np.random.normal(size=data.shape[0])
     return data
 
+#од представляет собой определение функции stretch, которая применяет эффект растяжения времени к аудио-сигналу data с помощью библиотеки librosa
 def stretch(data, rate=0.8):
     return librosa.effects.time_stretch(data, rate=rate)
 
@@ -22,19 +24,22 @@ def pitch(data, sampling_rate, pitch_factor=0.7):
 
 def feature_extractors(data, sr):
     result=np.array([])
+    #zero crossing rate: Вычисляет среднюю частоту пересечения нуля сигнала
     zcr=np.mean(librosa.feature.zero_crossing_rate(y=data).T, axis=0)
     result=np.hstack((result,zcr))
     
+    #(short-time Fourier transform): Вычисляет спектрограмму сигнала
     stft = np.abs(librosa.stft(data))
+    # chroma_stft (chroma feature): Вычисляет хроматический признак с использованием стандартного спектра
     chroma_stft = np.mean(librosa.feature.chroma_stft(S=stft, sr=sr).T, axis=0)
     result = np.hstack((result, chroma_stft))
-    
+    # mfcc (Mel-frequency cepstral coefficients): Вычисляет MFCC с использованием логарифма мел-частотного спектра
     mfcc = np.mean(librosa.feature.mfcc(y=data, sr=sr).T, axis=0)
     result = np.hstack((result, mfcc))
-    
+    # rms (root mean square): Вычисляет среднеквадратичное значение сигнала. 
     rms = np.mean(librosa.feature.rms(y=data).T, axis=0)
     result = np.hstack((result, rms))
-    
+    # mel (Mel-scaled spectrogram): Вычисляет Мел-шкалированную спектрограмму сигнала. 
     mel = np.mean(librosa.feature.melspectrogram(y=data, sr=sr).T, axis=0)
     result = np.hstack((result, mel)) 
     return result
@@ -84,7 +89,7 @@ def main():
 
     Features=pd.DataFrame(X)
     Features['Labels']=Y
-    Features.to_csv('final_csv_actor.csv',index=False)
+    Features.to_csv('utils/final_csv_actor.csv',index=False)
 
 
 if __name__ == "__main__":

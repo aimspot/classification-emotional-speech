@@ -58,7 +58,7 @@ def save_model(model, name):
 
 def main(opt):
     #add getting data from db
-    x_train, x_test, y_train, y_test = get_split_dataset('final_csv_actor.csv')
+    x_train, x_test, y_train, y_test = get_split_dataset('utils/final_csv_actor.csv')
     
     for name, model_init in zip(['CNN', 'DCNN', 'LSTM', 'RNN'], [cnn_model(x_train), dcnn_model(x_train), lstm_model(x_train), rnn_model(x_train)]):
         if opt.model == name:
@@ -67,7 +67,7 @@ def main(opt):
     rlrp = ReduceLROnPlateau(monitor='loss', factor=0.4, verbose=0, patience=2, min_lr=opt.lr)
     history=model.fit(x_train, y_train, batch_size=opt.bs, epochs=opt.epochs, validation_data=(x_test, y_test), callbacks=[rlrp])
     
-    save_model(model, name)
+    save_model(model, opt.model)
     
 
 if __name__ == "__main__":
