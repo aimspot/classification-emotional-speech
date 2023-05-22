@@ -7,6 +7,8 @@ from models.dcnn import dcnn_model
 from models.lstm import lstm_model
 from models.rnn import rnn_model
 
+from utils.database import Database
+
 import tensorflow as tf
 from tensorflow.keras import backend as K
 
@@ -15,6 +17,8 @@ from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.model_selection import train_test_split
 from keras.callbacks import ReduceLROnPlateau
 
+
+
 import keras
 import tensorflow as tf
 
@@ -22,8 +26,8 @@ import argparse
 
 from datetime import datetime
 
-def get_split_dataset(path_to_csv):
-    df=pd.read_csv(path_to_csv)
+def get_split_dataset(df):
+    #df=pd.read_csv(path_to_csv)
     X = df.iloc[: ,:-1].values
     Y = df['Labels'].values
     encoder = OneHotEncoder()
@@ -57,16 +61,15 @@ def save_model(model, name):
     
 
 def main(opt):
-    #add getting data from db
-    x_train, x_test, y_train, y_test = get_split_dataset('utils/final_csv_actor.csv')
-    
+    db = Database()
+    df = db.getting_data()
+    x_train, x_test, y_train, y_test = get_split_dataset(df)
     for name, model_init in zip(['CNN', 'DCNN', 'LSTM', 'RNN'], [cnn_model(x_train), dcnn_model(x_train), lstm_model(x_train), rnn_model(x_train)]):
         if opt.model == name:
             model = model_init
             
     rlrp = ReduceLROnPlateau(monitor='loss', factor=0.4, verbose=0, patience=2, min_lr=opt.lr)
     history=model.fit(x_train, y_train, batch_size=opt.bs, epochs=opt.epochs, validation_data=(x_test, y_test), callbacks=[rlrp])
-    
     save_model(model, opt.model)
     
 

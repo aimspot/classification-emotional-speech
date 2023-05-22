@@ -18,6 +18,7 @@ class Database:
         
 
     def create_table_data(self, df):
+        self.drop_table_data()
         df = df.add_prefix('s_')
         create_table_query = f'CREATE TABLE dataset ('
         for column in df.columns:
