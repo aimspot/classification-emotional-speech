@@ -4,6 +4,7 @@ import numpy as np
 import librosa
 from tqdm import tqdm
 
+
 def noise(data):
     # Добавляет шум к аудио-сигналу data с использованием случайного шумового амплитудного коэффициента.
     noise_amp = 0.035*np.random.uniform()*np.amax(data)

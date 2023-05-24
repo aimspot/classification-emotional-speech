@@ -47,6 +47,11 @@ class Database:
         self.connection.commit()
         print("CSV added to db")
 
+    def insert_metrics(self, name, name_model, precision, recall, accuracy, f1):
+        query = '''INSERT INTO "models" ("name", "name_model", "precision", "recall", "accuracy", "f1")
+                VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')'''.format(name, name_model, precision, recall, accuracy, f1)
+        self.cur.execute(query)
+        self.connection.commit()
 
     def getting_data(self):
         query = f"SELECT * FROM dataset"
