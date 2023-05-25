@@ -12,7 +12,7 @@ jobs:
         python-version: '3.8'
     - name: install package
       run: |
-        pip install --upgrade pip
+        pip install pip==21.3.1
         pip install -r core/models/requirements.txt
     - name: train model and laod results
       run: python core/metrics.py
