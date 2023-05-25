@@ -1,0 +1,52 @@
+name: Train-local-workflow
+on:
+  workflow_dispatch:
+jobs:
+  Train_CNN:
+    runs-on: 
+      - self-hosted
+      - label-1
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+    - name: install package
+      run: |
+        pip install --upgrade pip
+        pip install -r core/models/requirements.txt
+    - name: train model and laod results
+      run: python core/train.py --model CNN --epochs 50 --bs 20
+      
+  Train_DCNN:
+    runs-on: 
+      - self-hosted
+      - label-1
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+    - name: install package
+      run: |
+        pip install --upgrade pip
+        pip install -r core/models/requirements.txt
+    - name: train model and laod results
+      run: python core/train.py --model DCNN --epochs 50 --bs 20
+    
+  Train_LSTM:
+    runs-on: 
+      - self-hosted
+      - label-1
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+    - name: install package
+      run: |
+        pip install --upgrade pip
+        pip install -r core/models/requirements.txt
