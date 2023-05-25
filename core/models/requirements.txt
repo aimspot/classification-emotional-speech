@@ -1,5 +1,5 @@
 pandas
-tensorflow==2.4.0
+tensorflow-gpu==2.4.0
 #numpy==1.19
 librosa
 tqdm
