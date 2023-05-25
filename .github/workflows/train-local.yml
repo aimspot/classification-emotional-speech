@@ -16,7 +16,7 @@ jobs:
         pip install --upgrade pip
         pip install -r core/models/requirements.txt
     - name: train model and laod results
-      run: python core/train.py --model CNN --epochs 50 --bs 70
+      run: python core/train.py --model CNN --epochs 50 --bs 100
       
   Train_DCNN:
     runs-on: 
@@ -32,7 +32,7 @@ jobs:
         pip install --upgrade pip
         pip install -r core/models/requirements.txt
     - name: train model and laod results
-      run: python core/train.py --model DCNN --epochs 50 --bs 70
+      run: python core/train.py --model DCNN --epochs 50 --bs 100
     
   Train_LSTM:
     runs-on: 
@@ -48,7 +48,7 @@ jobs:
         pip install --upgrade pip
         pip install -r core/models/requirements.txt
     - name: train model and laod results
-      run: python core/train.py --model LSTM --epochs 10 --bs 70
+      run: python core/train.py --model LSTM --epochs 10 --bs 100
         
   Train_RNN:
     runs-on: 
@@ -64,5 +64,5 @@ jobs:
         pip install --upgrade pip
         pip install -r core/models/requirements.txt
     - name: train model and laod results
-      run: python core/train.py --model RNN --epochs 30 --bs 70
+      run: python core/train.py --model RNN --epochs 20 --bs 100
         
