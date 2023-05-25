@@ -4,8 +4,8 @@ on:
 jobs:
   Eval_models:
     runs-on: 
-      - self-hosted
-      - label-2
+      - self-hosted-1
+      - label-3
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.x
