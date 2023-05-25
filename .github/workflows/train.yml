@@ -12,5 +12,4 @@ jobs:
       run: |
         pip install pip==21.3.1
         pip install -r core/models/requirements.txt
-        pip install -r requirements.txt
       
