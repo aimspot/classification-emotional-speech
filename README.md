@@ -3,8 +3,8 @@
 ### Цель: Определить эмоции человека по записи голоса.
 ### Автор: Герасимчук Михаил Юрьевич (P4141)
 
-Status of Last Deployment:<br>
-<img src="https://github.com/adv4000/github-actions-part-1-basics/workflows/classification-emotional-speech/badge.svg?branch=master"><br>
+Status of Last Deployment Dataset:<br>
+<img src="https://github.com/aimspot/classification-emotional-speech/workflows/Dataset-workflow/badge.svg?branch=master"><br>
 
 Задачи:
 1. Анализ существующих решений;
