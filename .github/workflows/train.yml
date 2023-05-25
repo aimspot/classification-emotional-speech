@@ -1,0 +1,15 @@
+name: Train-workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Train_CNN:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: install package
+      run: |
+        pip install -r core/models/requirements.txt
+        pip install -r requirements.txt
+      
