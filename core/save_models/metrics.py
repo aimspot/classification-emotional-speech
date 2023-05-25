@@ -1,6 +1,5 @@
 import argparse
 import tensorflow as tf
-from tensorflow.keras.models import load_model
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
 from utils.yandex_cloud import download_model
 from utils.database import Database
@@ -55,7 +54,7 @@ def metrics_model():
             download_model(name_model)
         except:
             print("Model is ready")
-        model = tf.keras.models.load_model(f'save_models/{name_model}/saved_model.pb')
+        model = tf.keras.models.load_model(f'{name_model}')
         predictions = model.predict(x_test)
 
         threshold = 0.5
