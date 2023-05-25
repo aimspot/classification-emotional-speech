@@ -1,11 +1,11 @@
 pandas
-numpy==1.19
+tensorflow==2.5
+#numpy==1.19
 librosa
 tqdm
 psycopg2-binary
 pymysql
 yandex
-tensorflow==2.3
 keras==2.4.3
 sklearn
 tensorflow
