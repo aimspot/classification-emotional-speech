@@ -15,6 +15,11 @@ class Database:
         drop_query = f"DROP TABLE IF EXISTS dataset"
         self.cur.execute(drop_query)
         self.connection.commit()
+
+    def delete_table_data(self):
+        query = f"DELETE FROM dataset"
+        self.cur.execute(query)
+        self.connection.commit()
         
 
     def create_table_data(self, df):
@@ -38,6 +43,7 @@ class Database:
 
 
     def insert_data(self, df):
+        self.delete_table_data()
         df = df.add_prefix('s_')
         columns = ', '.join(df.columns)
         placeholders = ', '.join(['%s'] * len(df.columns))
@@ -46,6 +52,7 @@ class Database:
         self.cur.executemany(insert_query, values)
         self.connection.commit()
         print("CSV added to db")
+        
 
     def insert_metrics(self, name, name_model, precision, recall, accuracy, f1):
         query = '''INSERT INTO "models" ("name", "name_model", "precision", "recall", "accuracy", "f1")
