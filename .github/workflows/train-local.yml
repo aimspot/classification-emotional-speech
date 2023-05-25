@@ -22,7 +22,7 @@ jobs:
   Train_DCNN:
     runs-on: 
       - self-hosted
-      - label-2
+      - label-1
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.x
@@ -39,7 +39,7 @@ jobs:
   Train_LSTM:
     runs-on: 
       - self-hosted
-      - label-2
+      - label-1
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.x
