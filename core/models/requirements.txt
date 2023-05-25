@@ -1,9 +1,11 @@
 pandas
+numpy==1.19
 librosa
 tqdm
+psycopg2-binary
+pymysql
+yandex
 keras==2.4.3
 sklearn
-segmentation-models
-#tensorflowgpu
 tensorflow
-numpy==1.19
+segmentation-models
