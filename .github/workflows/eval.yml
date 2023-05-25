@@ -1,0 +1,18 @@
+name: Eval-workflow
+on:
+  workflow_dispatch:
+jobs:
+  Eval_models:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+    - name: install package
+      run: |
+        pip install --upgrade pip
+        pip install -r core/models/requirements.txt
+    - name: train model and laod results
+      run: python core/metrics.py
