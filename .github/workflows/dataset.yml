@@ -8,14 +8,10 @@ on:
   workflow_dispatch:
 
 jobs:
-
   download_dataset:
-  
     runs-on: ubuntu-latest
-    
     steps:
       - uses: actions/checkout@v3
-      
       - name: install package and download dataset
         run: |
           pip install kaggle
@@ -25,5 +21,7 @@ jobs:
         run: unzip ravdess-emotional-speech-audio.zip -d dataset
       - name: get feature csv
         run: python core/extract_features.py
+      - name: upload dataset
+        run: python core/utils/data.py
 #       - name: start train
 #         run: python core/train.py
