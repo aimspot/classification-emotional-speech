@@ -28,6 +28,6 @@ def upload_model(name_model):
 
 
 def download_model(name_model):
-    y.download(f"/models/{name_model}.zip", f"save_models/{name_model}.zip")
-    unzip_file(f"save_models/{name_model}.zip", f"save_models/{name_model}")
+    y.download(f"/models/{name_model}.zip", f"{name_model}.zip")
+    unzip_file(f"{name_model}.zip", f"{name_model}")
     print("Model downloaded")

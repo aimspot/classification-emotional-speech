@@ -71,7 +71,6 @@ def metrics_model():
         print("F1-score:", f1)
         db.delete_null_metrics(name, name_model)
         db.insert_metrics(name, name_model, precision, recall, accuracy, f1)
-        print("Model not found")
     select_best_model(db)
 
 if __name__ == "__main__":
