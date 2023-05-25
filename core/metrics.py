@@ -55,23 +55,26 @@ def metrics_model():
             download_model(name_model)
         except:
             print("Model is ready")
-        model = tf.keras.models.load_model(f'save_models/{name_model}')
-        predictions = model.predict(x_test)
+        try:
+            model = tf.keras.models.load_model(f'save_models/{name_model}')
+            predictions = model.predict(x_test)
 
-        threshold = 0.5
-        predicted_labels = (predictions > threshold).astype(int)
-        true_labels = y_test
+            threshold = 0.5
+            predicted_labels = (predictions > threshold).astype(int)
+            true_labels = y_test
 
-        precision = precision_score(true_labels, predicted_labels, pos_label='positive', average='micro')
-        recall = recall_score(true_labels, predicted_labels, pos_label='positive', average='micro')
-        f1 = f1_score(true_labels, predicted_labels, pos_label='positive', average='micro')
-        accuracy = accuracy_score(true_labels, predicted_labels)
-        print("Precision:", precision)
-        print("Recall:", recall)
-        print("Accuracy:", accuracy)
-        print("F1-score:", f1)
-        db.delete_null_metrics(name, name_model)
-        db.insert_metrics(name, name_model, precision, recall, accuracy, f1)
+            precision = precision_score(true_labels, predicted_labels, pos_label='positive', average='micro')
+            recall = recall_score(true_labels, predicted_labels, pos_label='positive', average='micro')
+            f1 = f1_score(true_labels, predicted_labels, pos_label='positive', average='micro')
+            accuracy = accuracy_score(true_labels, predicted_labels)
+            print("Precision:", precision)
+            print("Recall:", recall)
+            print("Accuracy:", accuracy)
+            print("F1-score:", f1)
+            db.delete_null_metrics(name, name_model)
+            db.insert_metrics(name, name_model, precision, recall, accuracy, f1)
+        except:
+            print("Model not found")
     select_best_model(db)
 
 if __name__ == "__main__":
