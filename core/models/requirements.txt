@@ -7,5 +7,5 @@ pymysql
 yandex
 keras==2.4.3
 sklearn
-tensorflow
+tensorflow==2.4
 segmentation-models
