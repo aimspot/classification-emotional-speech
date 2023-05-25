@@ -55,7 +55,7 @@ def metrics_model():
             download_model(name_model)
         except:
             print("Model is ready")
-        model = tf.keras.models.load_model(f'save_models/{name_model}')
+        model = tf.keras.models.load_model(f'save_models/{name_model}/saved_model.pb')
         predictions = model.predict(x_test)
 
         threshold = 0.5
