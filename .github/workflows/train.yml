@@ -16,4 +16,6 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install -r core/models/requirements.txt
+    - name: train model and laod results
+        pip core/train.py
       
