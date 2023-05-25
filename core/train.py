@@ -15,7 +15,7 @@ from keras.callbacks import ReduceLROnPlateau
 import tensorflow as tf
 
 import argparse
-
+from utils.yandex_cloud import upload_model
 from datetime import datetime
 
 
@@ -52,7 +52,9 @@ def main(opt):
     rlrp = ReduceLROnPlateau(monitor='loss', factor=0.4, verbose=0, patience=2, min_lr=opt.lr)
     history=model.fit(x_train, y_train, batch_size=opt.bs, epochs=opt.epochs, validation_data=(x_test, y_test), callbacks=[rlrp])
     name_model = save_model(model, opt.model)
-    metrics_model(opt.model, name_model)
+    db.insert_model_name(model, name_model)
+    upload_model(name_model)
+    #metrics_model(opt.model, name_model)
     
 
 if __name__ == "__main__":

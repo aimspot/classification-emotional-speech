@@ -11,10 +11,11 @@ def opt():
 def main(opt):
     df = pd.read_csv(opt.path_csv)
     db = Database()
-    # db.create_table_data(df)
-    #db.insert_data(df)
-    df = db.getting_data()
-    print(df.shape)
+    db.create_table_data(df)
+    db.insert_data(df)
+    #df = db.getting_data()
+    #print(df.shape)
+    print("Data uploaded")
     #print("Hello")
 
 

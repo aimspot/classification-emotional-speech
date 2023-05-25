@@ -53,6 +53,36 @@ class Database:
         self.cur.execute(query)
         self.connection.commit()
 
+    
+    def insert_model_name(self, name, name_model):
+        query = '''INSERT INTO "models" ("name", "name_model")
+                VALUES('{0}', '{1}')'''.format(name, name_model)
+        self.cur.execute(query)
+        self.connection.commit()
+
+
+    def insert_eval(self, name, name_model, precision, recall, accuracy, f1):
+        query = '''INSERT INTO "models" ("name", "name_model", "precision", "recall", "accuracy", "f1")
+                SELECT '{0}', '{1}', '{2}', '{3}', '{4}', '{5}'
+                WHERE NOT EXISTS (
+                    SELECT 1 FROM "models" WHERE "name"='{0}' AND "name_model"='{1}'
+                )'''.format(name, name_model, precision, recall, accuracy, f1)
+        self.cur.execute(query)
+        self.connection.commit()
+
+    
+    def get_empty_metrics(self):
+        query = '''SELECT "name", "name_model"
+                FROM "models"
+                WHERE "precision" IS NULL AND "recall" IS NULL AND "accuracy" IS NULL AND "f1" IS NULL'''
+        self.cur.execute(query)
+        results = self.cur.fetchall()
+        names = [result[0] for result in results]
+        name_models = [result[1] for result in results]
+        return names, name_models
+
+    
+
     def getting_data(self):
         query = f"SELECT * FROM dataset"
         df = pd.read_sql(query, self.connection)
