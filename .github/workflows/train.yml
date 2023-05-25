@@ -8,8 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
     - name: install package
       run: |
-        pip install pip==21.3.1
+        pip install --upgrade pip
         pip install -r core/models/requirements.txt
       
