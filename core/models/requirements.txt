@@ -9,6 +9,6 @@ psutil
 yandex
 keras==2.4.0
 sklearn
-tensorflow
+#tensorflow
 segmentation-models
 yadisk
