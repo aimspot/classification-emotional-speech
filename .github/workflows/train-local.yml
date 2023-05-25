@@ -16,8 +16,6 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install -r core/models/requirements.txt
-        conda install -c conda-forge ta-lib
-        pip install tensorflow-gpu
     - name: train model and laod results
       run: python core/train.py --model CNN --epochs 50 --bs 20
       
@@ -35,8 +33,6 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install -r core/models/requirements.txt
-        conda install -c conda-forge ta-lib
-        pip install tensorflow-gpu
     - name: train model and laod results
       run: python core/train.py --model DCNN --epochs 50 --bs 20
     
@@ -54,8 +50,6 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install -r core/models/requirements.txt
-        conda install -c conda-forge ta-lib
-        pip install tensorflow-gpu
     - name: train model and laod results
       run: python core/train.py --model LSTM --epochs 50 --bs 20
         
@@ -73,8 +67,6 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install -r core/models/requirements.txt
-        conda install -c conda-forge ta-lib
-        pip install tensorflow-gpu
     - name: train model and laod results
       run: python core/train.py --model RNN --epochs 50 --bs 20
         
