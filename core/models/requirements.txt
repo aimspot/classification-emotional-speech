@@ -5,6 +5,7 @@ librosa
 tqdm
 psycopg2-binary
 pymysql
+psutil
 yandex
 keras==2.4.3
 sklearn
