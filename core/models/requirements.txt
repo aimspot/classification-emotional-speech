@@ -1,5 +1,5 @@
 pandas
-tensorflow==2.5
+tensorflow==2.4.0
 #numpy==1.19
 librosa
 tqdm
@@ -7,7 +7,7 @@ psycopg2-binary
 pymysql
 psutil
 yandex
-keras==2.4.3
+keras==2.4.0
 sklearn
 tensorflow
 segmentation-models
