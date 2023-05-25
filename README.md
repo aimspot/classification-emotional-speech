@@ -55,7 +55,7 @@
 <h1>Диаграмма компонентов</h1>
 
 <div align="center">
-    <img src="docs/1.png" width = 400px>
+    <img src="docs/1.png" width = 600px>
 </div>
 
 <h1>Диаграмма активностей</h1>
