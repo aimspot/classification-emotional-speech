@@ -17,5 +17,5 @@ jobs:
         pip install --upgrade pip
         pip install -r core/models/requirements.txt
     - name: train model and laod results
-        pip core/train.py
+      run: python core/train.py --model CNN --epochs 5 --bs 20
       
