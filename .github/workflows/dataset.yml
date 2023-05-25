@@ -20,7 +20,7 @@ jobs:
       - name: unzip dataset
         run: unzip ravdess-emotional-speech-audio.zip -d dataset
       - name: get feature csv
-        run: python core/extract_features.py
+        run: python core/utils/extract_features.py
       - name: upload dataset
         run: python core/utils/data.py
 #       - name: start train
