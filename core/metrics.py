@@ -27,17 +27,34 @@ def get_split_dataset(df):
     x_test = np.expand_dims(x_test, axis=2)
     return x_train, x_test, y_train, y_test
 
+def select_best_model(db):
+    name_model_list, accuracy_list, f1_list = db.get_model_metrics()
+    best_accuracy = 0.0
+    best_f1 = 0.0
+    best_model_name = ""
+
+    for name_model, accuracy, f1 in zip(name_model_list, accuracy_list, f1_list):
+        if accuracy > best_accuracy and f1 > best_f1:
+            best_accuracy = accuracy
+            best_f1 = f1
+            best_model_name = name_model
+    db.delete_best_model()
+    db.insert_best_model(best_model_name)
+    print(best_model_name)
+
+
 
 
 def metrics_model():
-    #x_train, x_test, y_train, y_test = get_split_dataset(opt.data)
     db = Database()
     df = db.getting_data()
     x_train, x_test, y_train, y_test = get_split_dataset(df)
     names, name_models = db.get_empty_metrics()
     for name, name_model in zip(names, name_models):
-        #Запустить цикл по моделям без метрик
-        download_model(name_model)
+        try:
+            download_model(name_model)
+        except:
+            print("Model is ready")
         model = tf.keras.models.load_model(f'save_models/{name_model}')
         predictions = model.predict(x_test)
 
@@ -53,7 +70,9 @@ def metrics_model():
         print("Recall:", recall)
         print("Accuracy:", accuracy)
         print("F1-score:", f1)
-        db.insert_metrics(model, name_model, precision, recall, accuracy, f1)
+        db.delete_null_metrics(name, name_model)
+        db.insert_metrics(name, name_model, precision, recall, accuracy, f1)
+    select_best_model(db)
 
 if __name__ == "__main__":
     metrics_model()

@@ -53,6 +53,20 @@ class Database:
         self.cur.execute(query)
         self.connection.commit()
 
+
+    def delete_best_model(self):
+        query = '''DELETE FROM best_model'''
+        self.cur.execute(query)
+        self.connection.commit()
+
+
+    def insert_best_model(self, name_model):
+        query = '''INSERT INTO "best_model" ("name_model")
+                VALUES('{0}')'''.format(name_model)
+        self.cur.execute(query)
+        self.connection.commit()
+
+
     
     def insert_model_name(self, name, name_model):
         query = '''INSERT INTO "models" ("name", "name_model")
@@ -70,6 +84,13 @@ class Database:
         self.cur.execute(query)
         self.connection.commit()
 
+    def delete_null_metrics(self, name, name_model):
+        query = '''DELETE FROM models WHERE name = %s AND name_model = %s'''
+        values = (name, name_model)
+        self.cur.execute(query, values)
+        self.connection.commit()
+
+
     
     def get_empty_metrics(self):
         query = '''SELECT "name", "name_model"
@@ -80,8 +101,22 @@ class Database:
         names = [result[0] for result in results]
         name_models = [result[1] for result in results]
         return names, name_models
-
     
+
+    def get_model_metrics(self):
+        query = '''SELECT name_model, accuracy, f1 FROM models'''
+        self.cur.execute(query)
+        results = self.cur.fetchall()
+        name_model_list = []
+        accuracy_list = []
+        f1_list = []
+
+        for row in results:
+            name_model_list.append(row[0])
+            accuracy_list.append(row[1])
+            f1_list.append(row[2])
+
+        return name_model_list, accuracy_list, f1_list
 
     def getting_data(self):
         query = f"SELECT * FROM dataset"
