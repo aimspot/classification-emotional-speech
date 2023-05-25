@@ -90,7 +90,7 @@ def main():
 
     Features=pd.DataFrame(X)
     Features['Labels']=Y
-    Features.to_csv('utils/final_csv_actor.csv',index=False)
+    Features.to_csv('./utils/final_csv_actor.csv',index=False)
 
 
 if __name__ == "__main__":
