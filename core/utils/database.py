@@ -124,6 +124,7 @@ class Database:
             f1_list.append(row[2])
 
         return name_model_list, accuracy_list, f1_list
+    
 
     def getting_data(self):
         query = f"SELECT * FROM dataset"

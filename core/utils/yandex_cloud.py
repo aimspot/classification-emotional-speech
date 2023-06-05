@@ -18,6 +18,12 @@ def unzip_file(zip_path, extract_path):
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
         zip_ref.extractall(extract_path)
 
+def remove_model(name_model):
+    try:
+        y.remove(f"save_models/{name_model}.zip", permanently=True)
+    except:
+        print("Remove cancel")
+
 
 def upload_model(name_model):
     folder_to_zip(f"save_models/{name_model}", f"save_models/{name_model}.zip")
