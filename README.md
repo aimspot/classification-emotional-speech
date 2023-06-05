@@ -19,6 +19,7 @@ Status Evaluation:<br>
 4. Оценка моделей исходя из показателей полученных метрик (`Precision`, `Recall`, `Accuracy`,`F1-score`) на исходном наборе данных;
 5. Выбор наиболее оптимальной модели;
 6. Развёртывание наилучшей модели.
+7. Оптимизация модели.
   
 
 Датасет: [Kaggle dataset](https://www.kaggle.com/datasets/uwrfkaggler/ravdess-emotional-speech-audio)  
