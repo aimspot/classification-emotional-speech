@@ -4,13 +4,13 @@
 ### Автор: Герасимчук Михаил Юрьевич (P4141)
 
 Status Dataset:<br>
-<img src="https://github.com/aimspot/classification-emotional-speech/workflows/Dataset-workflow/badge.svg?branch=master"><br>
+<img src="https://github.com/aimspot/classification-emotional-speech/workflows/Dataset-workflow/badge.svg?branch=main"><br>
 
 Status Train:<br>
-<img src="https://github.com/aimspot/classification-emotional-speech/workflows/Train-local-workflow/badge.svg?branch=master"><br>
+<img src="https://github.com/aimspot/classification-emotional-speech/workflows/Train-local-workflow/badge.svg?branch=main"><br>
 
 Status Evaluation:<br>
-<img src="https://github.com/aimspot/classification-emotional-speech/workflows/Eval-workflow/badge.svg?branch=master"><br>
+<img src="https://github.com/aimspot/classification-emotional-speech/workflows/Eval-workflow/badge.svg?branch=main"><br>
 
 Задачи:
 1. Анализ существующих решений;
