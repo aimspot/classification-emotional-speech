@@ -5,3 +5,4 @@ tqdm
 psycopg2-binary
 pymysql
 yandex
+Flask==2.0.1

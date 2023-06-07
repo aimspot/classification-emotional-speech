@@ -54,9 +54,9 @@ class Database:
         print("CSV added to db")
         
 
-    def insert_metrics(self, name, name_model, precision, recall, accuracy, f1):
-        query = '''INSERT INTO "models" ("name", "name_model", "precision", "recall", "accuracy", "f1")
-                VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')'''.format(name, name_model, precision, recall, accuracy, f1)
+    def insert_metrics(self, name, name_model, precision, recall, accuracy, f1, inf_time, memory):
+        query = '''INSERT INTO "models" ("name", "name_model", "precision", "recall", "accuracy", "f1", "inf_time", "memory")
+                VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', {7})'''.format(name, name_model, precision, recall, accuracy, f1, inf_time, memory)
         self.cur.execute(query)
         self.connection.commit()
 
@@ -82,14 +82,14 @@ class Database:
         self.connection.commit()
 
 
-    def insert_eval(self, name, name_model, precision, recall, accuracy, f1):
-        query = '''INSERT INTO "models" ("name", "name_model", "precision", "recall", "accuracy", "f1")
-                SELECT '{0}', '{1}', '{2}', '{3}', '{4}', '{5}'
-                WHERE NOT EXISTS (
-                    SELECT 1 FROM "models" WHERE "name"='{0}' AND "name_model"='{1}'
-                )'''.format(name, name_model, precision, recall, accuracy, f1)
-        self.cur.execute(query)
-        self.connection.commit()
+    # def insert_eval(self, name, name_model, precision, recall, accuracy, f1):
+    #     query = '''INSERT INTO "models" ("name", "name_model", "precision", "recall", "accuracy", "f1")
+    #             SELECT '{0}', '{1}', '{2}', '{3}', '{4}', '{5}'
+    #             WHERE NOT EXISTS (
+    #                 SELECT 1 FROM "models" WHERE "name"='{0}' AND "name_model"='{1}'
+    #             )'''.format(name, name_model, precision, recall, accuracy, f1)
+    #     self.cur.execute(query)
+    #     self.connection.commit()
 
     def delete_null_metrics(self, name, name_model):
         query = '''DELETE FROM models WHERE name = %s AND name_model = %s'''
@@ -136,10 +136,6 @@ class Database:
         query = f"SELECT * FROM dataset"
         df = pd.read_sql(query, self.connection)
         return df
-
-
-    def insert_model():
-        print("Model added to db")
 
     def connect_server(self):
         return psycopg2.connect(host=self.host, database=self.db, user=self.user, password=self.password)
