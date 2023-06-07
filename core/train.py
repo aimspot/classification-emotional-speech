@@ -63,6 +63,8 @@ def main(opt):
     if opt.update:
         remove_model(opt.model)
         name_model = opt.model
+        db.delete_model(name_model)
+        db.insert_model_name(name_model.split('_')[0], name_model)
     else:
         name_model = get_name_model(opt.model)
         db.insert_model_name(opt.model, name_model)

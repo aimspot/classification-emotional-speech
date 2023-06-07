@@ -26,6 +26,7 @@ def get_split_dataset(df):
     x_test = np.expand_dims(x_test, axis=2)
     return x_train, x_test, y_train, y_test
 
+
 def select_best_model(db):
     name_model_list, accuracy_list, f1_list = db.get_model_metrics()
     best_accuracy = 0.0
@@ -40,8 +41,6 @@ def select_best_model(db):
     db.delete_best_model()
     db.insert_best_model(best_model_name)
     print(best_model_name)
-
-
 
 
 def metrics_model():

@@ -98,7 +98,13 @@ class Database:
         self.connection.commit()
 
 
-    
+    def delete_model(self, name_model):
+        query = '''DELETE FROM models WHERE name_model = %s'''
+        values = (name_model)
+        self.cur.execute(query, values)
+        self.connection.commit()
+
+
     def get_empty_metrics(self):
         query = '''SELECT "name", "name_model"
                 FROM "models"
