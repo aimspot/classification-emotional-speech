@@ -12,4 +12,4 @@ jobs:
       with:
         python-version: '3.8'
     - name: request
-      run: python deploy/request.py -- name
+      run: python deploy/request.py
