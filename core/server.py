@@ -23,7 +23,7 @@ def predict():
     _, answer = predict_with_memory_and_time_measurement(model, audio_path)
 
     result = {
-        'prediction': answer.tolist()
+        'prediction': answer
     }
     return jsonify(result)
 

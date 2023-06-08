@@ -20,7 +20,7 @@ pymysql
 psutil
 yandex
 keras==2.4.0
-sklearn
+scikit-learn
 tensorflow==2.4.0
 segmentation-models
 yadisk
