@@ -1,0 +1,21 @@
+name: Quant-local-workflow
+on:
+  workflow_dispatch:
+jobs:
+  Quant_model:
+    runs-on: 
+      - label-1
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+    - name: install package
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: quantilization and get metrics new model
+      run: python core/quantilization.py
+    - name: set model to docker
+      run: python deploy/request.py
