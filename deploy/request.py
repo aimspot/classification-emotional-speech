@@ -7,7 +7,7 @@ def opt():
     parser.add_argument('--name', type=str, default='03-01-01-01-01-01-05.wav', help='name wav')
     return parser.parse_args()
 
-def main():
+def main(opt):
     os.system(f"curl -X POST -H 'Content-Type: application/json' -d '{'audio_path': {opt.name}}' http://localhost:5000/predict")
 
 if __name__ == "__main__":
