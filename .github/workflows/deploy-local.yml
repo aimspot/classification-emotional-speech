@@ -1,0 +1,15 @@
+name: Deploy-local-workflow
+on:
+  workflow_dispatch:
+jobs:
+  Post:
+    runs-on: 
+      - label-1
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+    - name: request
+      run: python deploy/request.py -- name
