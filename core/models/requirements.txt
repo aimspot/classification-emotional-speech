@@ -1,14 +1,26 @@
+# pandas
+# tensorflow-gpu==2.4.0
+# #numpy==1.19
+# librosa
+# tqdm
+# psycopg2-binary
+# pymysql
+# psutil
+# yandex
+# keras==2.4.0
+# sklearn
+# tensorflow==2.4.0
+# segmentation-models
+# yadisk
+# Flask==2.0.1
+
 pandas
-tensorflow-gpu==2.4.0
-#numpy==1.19
+numpy
 librosa
 tqdm
 psycopg2-binary
 pymysql
-psutil
-yandex
-keras==2.4.0
-sklearn
-tensorflow==2.4.0
-segmentation-models
-yadisk
+yadisk==1.2.19
+psutil==5.9.5
+psycopg2-binary==2.9.5
+Flask==2.0.1
