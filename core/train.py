@@ -34,7 +34,7 @@ def get_date_time():
     return formatted_datetime
 
 def get_name_model(name):
-    name_model = f'{name}_{get_date_time()}'
+    name_model = f'{get_date_time()}'
     return name_model
     
 def save_model(model, name_model):
@@ -61,10 +61,10 @@ def main(opt):
     memory_usage_mb = memory_info.used / (1024 * 1024)
     print("Memory usage:", memory_usage_mb, "MB")
     if opt.update:
-        remove_model(opt.model)
+        # remove_model(opt.model)
         name_model = opt.model
-        db.delete_model(name_model)
-        db.insert_model_name(name_model.split('_')[0], name_model)
+        # db.delete_model(name_model)
+        db.insert_model_name(db.get_model_by_name(name_model), name_model)
     else:
         name_model = get_name_model(opt.model)
         db.insert_model_name(opt.model, name_model)

@@ -11,35 +11,36 @@ class Database:
         self.connection = self.connect_server()
         self.cur = self.connection.cursor()
 
-    def drop_table_data(self):
-        drop_query = f"DROP TABLE IF EXISTS dataset"
-        self.cur.execute(drop_query)
-        self.connection.commit()
+    # def drop_table_data(self):
+    #     drop_query = f"DROP TABLE IF EXISTS dataset"
+    #     self.cur.execute(drop_query)
+    #     self.connection.commit()
 
-    def delete_table_data(self):
-        query = f"DELETE FROM dataset"
-        self.cur.execute(query)
-        self.connection.commit()
+
+    # def delete_table_data(self):
+    #     query = f"DELETE FROM dataset"
+    #     self.cur.execute(query)
+    #     self.connection.commit()
         
 
-    def create_table_data(self, df):
-        self.drop_table_data()
-        df = df.add_prefix('s_')
-        create_table_query = f'CREATE TABLE dataset ('
-        for column in df.columns:
-            if df[column].dtype == 'int64':
-                data_type = 'integer'
-            elif df[column].dtype == 'float64':
-                data_type = 'numeric'
-            elif df[column].dtype == 'bool':
-                data_type = 'boolean'
-            else:
-                data_type = 'text'
-            create_table_query += f'{str(column)} {data_type}, '
-        create_table_query = create_table_query[:-2]
-        create_table_query += ')'
-        self.cur.execute(create_table_query)
-        self.connection.commit()
+    # def create_table_data(self, df):
+    #     self.drop_table_data()
+    #     df = df.add_prefix('s_')
+    #     create_table_query = f'CREATE TABLE dataset ('
+    #     for column in df.columns:
+    #         if df[column].dtype == 'int64':
+    #             data_type = 'integer'
+    #         elif df[column].dtype == 'float64':
+    #             data_type = 'numeric'
+    #         elif df[column].dtype == 'bool':
+    #             data_type = 'boolean'
+    #         else:
+    #             data_type = 'text'
+    #         create_table_query += f'{str(column)} {data_type}, '
+    #     create_table_query = create_table_query[:-2]
+    #     create_table_query += ')'
+    #     self.cur.execute(create_table_query)
+    #     self.connection.commit()
 
 
     def insert_data(self, df):
@@ -60,7 +61,7 @@ class Database:
         self.cur.execute(query)
         self.connection.commit()
 
-
+    #BEST MODEL -------------------------------------------------------------------------
     def delete_best_model(self):
         query = '''DELETE FROM best_model'''
         self.cur.execute(query)
@@ -72,6 +73,10 @@ class Database:
                 VALUES('{0}')'''.format(name_model)
         self.cur.execute(query)
         self.connection.commit()
+
+
+
+    
 
 
     
@@ -131,6 +136,13 @@ class Database:
 
         return name_model_list, accuracy_list, f1_list
     
+    def get_model_by_name(self, name_model):
+        self.cur.execute("SELECT name FROM models WHERE name_model = %s", (name_model,))
+        result = self.cur.fetchone()
+        if result:
+            return result[0]
+            
+        
 
     def getting_data(self):
         query = f"SELECT * FROM dataset"
