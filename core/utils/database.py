@@ -73,6 +73,14 @@ class Database:
                 VALUES('{0}')'''.format(name_model)
         self.cur.execute(query)
         self.connection.commit()
+    
+    
+    def get_best_model(self):
+        query = '''SELECT name_model FROM best_model'''
+        self.cur.execute(query)
+        result = self.cur.fetchone()
+        if result:
+            return result[0]
 
 
 
