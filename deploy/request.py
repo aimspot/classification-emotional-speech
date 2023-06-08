@@ -8,7 +8,9 @@ def opt():
     return parser.parse_args()
 
 def main(opt):
-    os.system(f"curl -X POST -H 'Content-Type: application/json' -d '{'audio_path': {opt.name}}' http://localhost:5000/predict")
+    audio_path = opt.name
+    command = f"curl -X POST -H 'Content-Type: application/json' -d '{{\"audio_path\": \"{audio_path}\"}}' http://localhost:5000/predict"
+    os.system(command)
 
 if __name__ == "__main__":
     opt = opt()
