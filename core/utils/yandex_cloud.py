@@ -37,3 +37,7 @@ def download_model(name_model):
     y.download(f"/models/{name_model}.zip", f"{name_model}.zip")
     unzip_file(f"{name_model}.zip", f"{name_model}")
     print("Model downloaded")
+
+def download_sound(name_sound):
+    y.download(f"/sound/{name_sound}.wav", f"{name_sound}.wav")
+    print("Sound downloaded")

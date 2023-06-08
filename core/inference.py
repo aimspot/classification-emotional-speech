@@ -2,37 +2,44 @@ import time
 import psutil
 from keras.models import load_model
 from utils.database import Database
-from utils.yandex_cloud import download_model
+from utils.yandex_cloud import download_model, download_sound
+from utils.extract_features import get_features
 import tensorflow as tf
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
 
-def predict_with_memory_and_time_measurement():
-    db = Database()
-    name_model = "2023-06-08-00-15-24"
-    path_sound = "03-01-01-01-01-01-05.wav"
-
+def predict_with_memory_and_time_measurement(model, path_sound):
+    emotion = ['neutral', 'calm', 'happy', 'sad', 'angry', 'fear', 'disgust', 'surprise']
+   # path_sound = "03-01-01-01-01-01-05.wav"
     try:
-        download_model(name_model)
+        download_sound(path_sound.split('.')[0])
     except:
-        print("Model is ready")
-    model = tf.keras.models.load_model(f'{name_model}')
+        print("")
 
-    # Загрузка модели
-    start_memory = psutil.virtual_memory().used
-    model = tf.keras.models.load_model(f'{name_model}')
-    load_memory = (psutil.virtual_memory().used - start_memory) / (1024 * 1024)
+    test = get_features(path_sound)
+    testX = []
+    for ele in test:
+        testX.append(ele)
 
-    # Предсказание
-    #start_memory = psutil.virtual_memory().used
+    scaler = StandardScaler()
+    testX = scaler.fit_transform(testX)
+    testX = np.expand_dims(testX, axis=2)
+
     start_time = time.time()
-    predictions = model.predict(input_data)
-    #predict_memory = psutil.virtual_memory().used - start_memory
+    predictions = model.predict(testX)
+    threshold = 0.5
+    predicted_labels = (predictions > threshold).astype(int)
+    counts = np.sum(predicted_labels == 1, axis=0)
+
+    max_index = np.argmax(counts)
+
+    print("Emotion: ", emotion[max_index])
     predict_time = time.time() - start_time
-    print(load_memory)
-    print(predict_time)
+    print(f"Time: {predict_time} sec")
+    return predict_time, emotion[max_index]
 
-    return load_memory, predict_time
-
-if __name__ == "__main__":
-    predict_with_memory_and_time_measurement()
+# if __name__ == "__main__":
+#     predict_with_memory_and_time_measurement()
 
 

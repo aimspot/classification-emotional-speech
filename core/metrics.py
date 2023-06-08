@@ -5,9 +5,10 @@ from utils.yandex_cloud import download_model
 from utils.database import Database
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
+import psutil
 import numpy as np
 import pandas as pd
-
+from inference import predict_with_memory_and_time_measurement
 
 def get_split_dataset(df):
     #df=pd.read_csv(path_to_csv)
@@ -53,7 +54,13 @@ def metrics_model():
             download_model(name_model)
         except:
             print("Model is ready")
+
+
+        start_memory = psutil.virtual_memory().used
         model = tf.keras.models.load_model(f'{name_model}')
+        load_memory = (psutil.virtual_memory().used - start_memory) / (1024 * 1024)
+
+
         predictions = model.predict(x_test)
 
         threshold = 0.5
@@ -64,12 +71,17 @@ def metrics_model():
         recall = recall_score(true_labels, predicted_labels, pos_label='positive', average='micro')
         f1 = f1_score(true_labels, predicted_labels, pos_label='positive', average='micro')
         accuracy = accuracy_score(true_labels, predicted_labels)
+        time, _ = predict_with_memory_and_time_measurement(model, "03-01-01-01-01-01-05.wav")
+
         print("Precision:", precision)
         print("Recall:", recall)
         print("Accuracy:", accuracy)
         print("F1-score:", f1)
+        print(f"Time: {time} sec")
+        print(f"Ram: {load_memory} mb")
+
         db.delete_null_metrics(name, name_model)
-        db.insert_metrics(name, name_model, precision, recall, accuracy, f1)
+        db.insert_metrics(name, name_model, precision, recall, accuracy, f1, time, load_memory)
     select_best_model(db)
 
 if __name__ == "__main__":
