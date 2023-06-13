@@ -18,4 +18,4 @@ jobs:
     - name: quantilization and get metrics new model
       run: python core/quantilization.py
     - name: set model to docker
-      run: python deploy/request.py
+      run: python deploy/request.py --change True --name 2023-06-08-02-25-54
