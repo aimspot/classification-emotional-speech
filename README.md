@@ -12,8 +12,6 @@ Status Train:<br>
 Status Evaluation:<br>
 <img src="https://github.com/aimspot/classification-emotional-speech/workflows/Eval-workflow/badge.svg?branch=main"><br>
 
-Status Deploy:<br>
-<img src="https://github.com/aimspot/classification-emotional-speech/workflows/Deploy-local-workflow/badge.svg?branch=main"><br>
 
 Задачи:
 1. Анализ существующих решений;
