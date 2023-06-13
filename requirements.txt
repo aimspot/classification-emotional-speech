@@ -25,3 +25,4 @@ tensorflow==2.4.0
 segmentation-models
 yadisk
 Flask==2.0.1
+tensorflow-model-optimization

@@ -41,3 +41,14 @@ def download_model(name_model):
 def download_sound(name_sound):
     y.download(f"/sound/{name_sound}.wav", f"{name_sound}.wav")
     print("Sound downloaded")
+
+def upload_model_tfl(name_model):
+    #folder_to_zip(f"save_models/{name_model}", f"save_models/{name_model}.zip")
+    try:
+        y.upload(f"{name_model}.tflite", f"/models/{name_model}.tflite")
+    except:
+        print("Model loaded")
+
+def download_model_tfl(name_sound):
+    y.download(f"/models/{name_sound}.tflite", f"{name_sound}.tflite")
+    print("Model downloaded")

@@ -33,7 +33,7 @@ def get_date_time():
     formatted_datetime = current_datetime.strftime("%Y-%m-%d-%H-%M-%S")
     return formatted_datetime
 
-def get_name_model(name):
+def get_name_model():
     name_model = f'{get_date_time()}'
     return name_model
     
@@ -63,10 +63,11 @@ def main(opt):
     if opt.update:
         # remove_model(opt.model)
         name_model = opt.model
+        ## ADD tfl ----------------------------------------------------------------------------
         # db.delete_model(name_model)
         db.insert_model_name(db.get_model_by_name(name_model), name_model)
     else:
-        name_model = get_name_model(opt.model)
+        name_model = get_name_model()
         db.insert_model_name(opt.model, name_model)
     save_model(model, name_model)
     upload_model(name_model)
